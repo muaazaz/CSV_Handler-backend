@@ -18,7 +18,7 @@ export class TagsService {
       const tags = await this.tagRepository
         .createQueryBuilder('tags')
         .leftJoinAndSelect('tags.uploadedFiles', 'files')
-        .where('files.id IS NOT NULLl')
+        .where('files.id IS NOT NULL')
         .getMany();
       return tags;
     }

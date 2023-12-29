@@ -29,7 +29,6 @@ export class UploadedFileController {
   @Serialize(allFilesDto)
   @Get()
   findAll(@Query() query: any) {
-    console.log(query);
     return this.uploadedFileService.findAll(query.search);
   }
 
