@@ -1,4 +1,4 @@
-import { Csv } from 'src/csv/entities/csv.entity';
+import { CsvData } from 'src/csvData/entities/csvData.entity';
 import { Tag } from 'src/tags/entities/tag.entity';
 import {
   Column,
@@ -12,33 +12,24 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class File {
+export class UploadedFile {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  fieldname: string;
+  fieldName: string;
 
   @Column()
-  originalname: string;
+  originalName: string;
 
   @Column()
-  encoding: string;
-
-  @Column()
-  mimetype: string;
-
-  @Column()
-  destination: string;
-
-  @Column()
-  filename: string;
+  fileName: string;
 
   @Column()
   path: string;
 
-  @Column()
-  size: number;
+  @Column({ default: 0 })
+  fileNumber: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -46,10 +37,10 @@ export class File {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => Csv, (csv) => csv.fileId)
-  csvId: Csv[];
+  @OneToMany(() => CsvData, (csv) => csv.uploadedFile)
+  csvData: CsvData[];
 
-  @ManyToOne(() => Tag, (tag) => tag.filesId)
+  @ManyToOne(() => Tag, (tag) => tag.uploadedFiles)
   @JoinColumn()
-  tagId: Tag;
+  tag: Tag;
 }

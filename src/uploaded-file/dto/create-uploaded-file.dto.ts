@@ -1,4 +1,4 @@
-export class CreateFileDto {
+export class CreateUploadedFileDto {
   fieldname: string;
   originalname: string;
   encoding: string;

@@ -1,1 +1,3 @@
-export class CreateComparisonDto {}
+export class CreateComparisonDto {
+  tags: any;
+}

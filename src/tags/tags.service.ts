@@ -17,12 +17,14 @@ export class TagsService {
     if (type !== 'undefined') {
       const tags = await this.tagRepository
         .createQueryBuilder('tags')
-        .leftJoinAndSelect('tags.filesId', 'files')
-        .where('files.id is Not Null')
+        .leftJoinAndSelect('tags.uploadedFiles', 'files')
+        .where('files.id IS NOT NULLl')
         .getMany();
       return tags;
     }
-    const tags = await this.tagRepository.find({ relations: ['filesId'] });
+    const tags = await this.tagRepository.find({
+      relations: ['uploadedFiles'],
+    });
     return tags;
   }
 
@@ -37,9 +39,9 @@ export class TagsService {
   async remove(id: number) {
     const tag = await this.tagRepository.findOne({
       where: { id },
-      relations: ['filesId'],
+      relations: ['uploadedFiles'],
     });
-    if (tag.filesId.length > 0) {
+    if (tag.uploadedFiles.length > 0) {
       const error = 'Cannot Delete tags which are related to some files';
       throw new HttpException(
         {

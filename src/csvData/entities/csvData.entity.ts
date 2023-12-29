@@ -1,18 +1,19 @@
-import { File } from 'src/file/entities/file.entity';
+import { Exclude } from 'class-transformer';
 import { Report } from 'src/report/entities/report.entity';
+import { UploadedFile } from 'src/uploaded-file/entities/uploaded-file.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Csv {
+export class CsvData {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -28,17 +29,18 @@ export class Csv {
   @Column()
   company: string;
 
+  @Exclude()
   @CreateDateColumn()
   createdAt: Date;
 
+  @Exclude()
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => File, (file) => file.csvId)
+  @ManyToOne(() => UploadedFile, (file) => file.csvData)
   @JoinColumn()
-  fileId: number;
+  uploadedFile: UploadedFile;
 
-  @ManyToOne(() => Report, (report) => report.matchedRecords)
-  @JoinColumn()
-  report: Report;
+  @ManyToMany(() => Report, (report) => report.matchedRecords)
+  report: Report[];
 }

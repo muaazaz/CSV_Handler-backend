@@ -1,5 +1,5 @@
 import { Expose, Transform } from 'class-transformer';
-import { File } from 'src/file/entities/file.entity';
+import { UploadedFile } from 'src/uploaded-file/entities/uploaded-file.entity';
 
 export class allTagsDto {
   @Expose()
@@ -18,7 +18,9 @@ export class allTagsDto {
   @Expose()
   name: string;
 
-  @Transform(({ value }) => value.length)
+  @Transform(({ value }) => {
+    return value ? value.length : 0;
+  })
   @Expose()
-  filesId: File[];
+  uploadedFiles: UploadedFile[];
 }

@@ -1,11 +1,10 @@
 import { Comparison } from 'src/comparison/entities/comparison.entity';
-import { File } from 'src/file/entities/file.entity';
+import { UploadedFile } from 'src/uploaded-file/entities/uploaded-file.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -25,10 +24,9 @@ export class Tag {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => File, (file) => file.tagId)
-  filesId: File[];
+  @OneToMany(() => UploadedFile, (file) => file.tag)
+  uploadedFiles: UploadedFile[];
 
-  @ManyToOne(() => Comparison, (comparison) => comparison.tags)
-  @JoinColumn()
-  comparison: Comparison;
+  @ManyToMany(() => Comparison, (comparison) => comparison.tags)
+  comparisons: Comparison[];
 }

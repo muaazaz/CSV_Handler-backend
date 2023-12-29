@@ -1,11 +1,11 @@
 import { Comparison } from 'src/comparison/entities/comparison.entity';
-import { Csv } from 'src/csv/entities/csv.entity';
+import { CsvData } from 'src/csvData/entities/csvData.entity';
 import {
   Column,
   Entity,
-  JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -18,9 +18,9 @@ export class Report {
   title: string;
 
   @ManyToOne(() => Comparison, (comparison) => comparison.reports)
-  @JoinColumn()
   comparison: Comparison;
 
-  @OneToMany(() => Csv, (csv) => csv)
-  matchedRecords: Csv[];
+  @ManyToMany(() => CsvData, (csv) => csv.report)
+  @JoinTable()
+  matchedRecords: CsvData[];
 }

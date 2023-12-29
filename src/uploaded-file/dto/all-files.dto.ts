@@ -1,8 +1,10 @@
 import { Expose, Transform } from 'class-transformer';
-import { File } from 'src/file/entities/file.entity';
 import { Tag } from 'src/tags/entities/tag.entity';
 
 export class allFilesDto {
+  @Expose()
+  id: number;
+
   @Transform(({ value }) =>
     value.toLocaleDateString('en-US', {
       month: 'short',
@@ -14,9 +16,9 @@ export class allFilesDto {
   createdAt: Date;
 
   @Expose()
-  originalname: string;
+  originalName: string;
 
   @Transform(({ value }) => value?.name)
   @Expose()
-  tagId: Tag;
+  tag: Tag;
 }

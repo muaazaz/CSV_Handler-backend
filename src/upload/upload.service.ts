@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUploadDto } from './dto/create-upload.dto';
 import { UpdateUploadDto } from './dto/update-upload.dto';
-import { FileService } from 'src/file/file.service';
+import { UploadedFileService } from 'src/uploaded-file/uploaded-file.service';
 
 @Injectable()
 export class UploadService {
-  constructor(private fileService: FileService) {}
+  constructor(private uploadedFileService: UploadedFileService) {}
   uploadFile(createUploadDto: CreateUploadDto) {
-    return this.fileService.create(createUploadDto);
+    return this.uploadedFileService.create(createUploadDto);
   }
 
   findAll() {
