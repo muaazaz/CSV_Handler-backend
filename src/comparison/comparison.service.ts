@@ -21,12 +21,12 @@ export class ComparisonService {
       Select Distinct C1.id,
       tg1.name AS Tag1Name, tg2.name AS Tag2Name,
       fi1.fileNumber AS File1No, fi2.fileNumber AS File2No
-      from CSV_Handler.csv_data AS C1
-      Join CSV_Handler.csv_data As C2 ON C1.id != C2.id
-      Inner Join CSV_Handler.uploaded_file AS fi1 ON C1.uploadedFileId = fi1.id
-      Inner Join CSV_Handler.uploaded_file AS fi2 ON C2.uploadedFileId = fi2.id
-      Inner Join CSV_Handler.tag AS tg1 ON fi1.tagId = tg1.id
-      Inner Join CSV_Handler.tag AS tg2 ON fi2.tagId = tg2.id
+      from csv_data AS C1
+      Join csv_data As C2 ON C1.id != C2.id
+      Inner Join uploaded_file AS fi1 ON C1.uploadedFileId = fi1.id
+      Inner Join uploaded_file AS fi2 ON C2.uploadedFileId = fi2.id
+      Inner Join tag AS tg1 ON fi1.tagId = tg1.id
+      Inner Join tag AS tg2 ON fi2.tagId = tg2.id
       where fi1.tagId IN (${searchTags}) AND
       fi2.tagId IN (${searchTags}) AND
       C1.firstName = C2.firstName AND
