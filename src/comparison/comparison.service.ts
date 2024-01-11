@@ -33,9 +33,9 @@ export class ComparisonService {
       C1.lastName = C2.lastName AND
       C1.contact = C2.contact AND
       C1.company = C2.company AND
-      fi1.id < fi2.id AND
-      tg1.name <> tg2.name;
-    `);
+      fi1.id < fi2.id; 
+      `);
+    // AND tg1.name <> tg2.name;
 
     const reports = {};
     const generatedReports: any = [];
